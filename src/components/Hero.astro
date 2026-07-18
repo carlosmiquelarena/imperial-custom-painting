@@ -1,0 +1,53 @@
+---
+import { company } from '../config/company';
+---
+<section class="relative">
+  <div class="relative h-[520px] md:h-[560px] overflow-hidden">
+    <img
+      src="/images/hero-bg.jpg"
+      alt="Imperial Custom Painting crew at work"
+      class="absolute inset-0 w-full h-full object-cover"
+      onerror="this.style.background='linear-gradient(120deg,#0b2545,#123a6b)'"
+    />
+    <div class="absolute inset-0 bg-ink/70"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 h-full flex items-center">
+      <div class="max-w-2xl fade-up">
+        <h1 class="text-3xl md:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
+          Professional Painters In
+          <span class="text-accent">SLO County &amp; SB County</span>
+          Exterior, Interior, Cabinet &amp; More
+        </h1>
+        <a
+          href={company.cta.href}
+          class="inline-flex items-center bg-accent text-ink px-7 py-3.5 rounded-md font-bold hover:brightness-95 transition"
+        >
+          {company.cta.label}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating step cards, overlapping the hero's bottom edge -->
+  <div class="relative max-w-6xl mx-auto px-6 -mt-16 md:-mt-20 z-10">
+    <div class="bg-white rounded-xl shadow-2xl grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-ink/10">
+      {[
+        { n: 1, label: 'Contact Us', desc: 'Explain the details about your project.' },
+        { n: 2, label: 'Free Estimate', desc: 'We provide a 100% free quote for your project.' },
+        { n: 3, label: 'Schedule Project', desc: 'We find your project on the schedule.' },
+        { n: 4, label: 'Ideal Project', desc: 'Your painting job is completed on time and on budget.' },
+      ].map((step) => (
+        <div class="p-6 flex gap-4 items-start">
+          <div class="w-10 h-10 shrink-0 rounded-full bg-accent/15 text-accent flex items-center justify-center font-bold">
+            {step.n}
+          </div>
+          <div>
+            <p class="font-heading font-semibold text-ink text-sm mb-1">Step {step.n}</p>
+            <p class="font-semibold text-ink text-sm mb-1">{step.label}</p>
+            <p class="text-xs text-ink/60 leading-relaxed">{step.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

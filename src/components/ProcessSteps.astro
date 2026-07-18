@@ -1,0 +1,25 @@
+---
+const steps = [
+  { label: 'Contact', desc: 'Reach out by phone or form, tell us what you need painted.' },
+  { label: 'Estimate', desc: 'We walk the site and give you a firm, written quote.' },
+  { label: 'Schedule', desc: 'Pick a start date that works around your life or business.' },
+  { label: 'Finish', desc: 'We prep, paint, clean up, and walk the job with you.' },
+];
+---
+<section class="bg-ink text-cream py-16 md:py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-heading text-3xl md:text-4xl font-semibold text-center mb-14">How it works</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
+      {steps.map((step, i) => (
+        <div class="relative">
+          <p class="font-heading text-5xl font-semibold text-primary/40 mb-3">{`0${i + 1}`}</p>
+          <h3 class="font-heading text-xl font-medium mb-2">{step.label}</h3>
+          <p class="text-cream/70 text-sm leading-relaxed">{step.desc}</p>
+          {i < steps.length - 1 && (
+            <span class="hidden lg:block absolute top-6 -right-3 w-6 h-px bg-cream/20"></span>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

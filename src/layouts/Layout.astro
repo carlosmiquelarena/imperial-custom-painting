@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import { theme } from '../config/theme';
+import { company } from '../config/company';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+
+const cssVars = `
+  --color-ink: ${theme.colors.ink};
+  --color-primary: ${theme.colors.primary};
+  --color-secondary: ${theme.colors.secondary};
+  --color-accent: ${theme.colors.accent};
+  --color-cream: ${theme.colors.cream};
+  --font-heading: ${theme.fonts.heading};
+  --font-body: ${theme.fonts.body};
+`;
+---
+<!doctype html>
+<html lang="en" style={cssVars}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={theme.fontImportUrl} />
+    <title>{title} | {company.name}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="font-body">
+    <slot />
+  </body>
+</html>

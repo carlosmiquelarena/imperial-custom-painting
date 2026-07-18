@@ -1,0 +1,19 @@
+---
+import { company } from '../config/company';
+---
+<section class="bg-ink text-white py-14">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+    <div>
+      <p class="uppercase tracking-widest text-xs font-bold text-accent mb-1">{company.name}</p>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold">
+        Ready for a quote that doesn't change later?
+      </h2>
+    </div>
+    <a
+      href={company.cta.href}
+      class="shrink-0 inline-flex items-center bg-accent text-ink px-7 py-3.5 rounded-md font-bold hover:brightness-95 transition"
+    >
+      {company.cta.label}
+    </a>
+  </div>
+</section>

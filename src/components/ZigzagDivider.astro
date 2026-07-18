@@ -1,0 +1,18 @@
+---
+// Reusable zigzag edge, matching the original Elementor site's section dividers.
+// flip=true mirrors it vertically (for closing a navy section back to white).
+// color controls the zigzag's fill (should match the section it's "cutting into").
+interface Props {
+  color?: string;
+  flip?: boolean;
+}
+const { color = 'var(--color-ink)', flip = false } = Astro.props;
+---
+<div class={`w-full leading-[0] ${flip ? 'rotate-180' : ''}`} aria-hidden="true">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="w-full h-8 md:h-10 block">
+    <polygon
+      points="0,40 0,20 50,0 100,20 150,0 200,20 250,0 300,20 350,0 400,20 450,0 500,20 550,0 600,20 650,0 700,20 750,0 800,20 850,0 900,20 950,0 1000,20 1050,0 1100,20 1150,0 1200,20 1200,40"
+      fill={color}
+    ></polygon>
+  </svg>
+</div>

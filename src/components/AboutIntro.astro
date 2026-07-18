@@ -1,0 +1,23 @@
+---
+import { company } from '../config/company';
+---
+<section class="py-20 md:py-28 pt-32 md:pt-36">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
+    <div>
+      <p class="text-ink/70 leading-relaxed">
+        <strong class="text-ink">{company.name}</strong>, based in {company.address},
+        is a trusted painting company that offers a comprehensive range of painting
+        services. With a strong commitment to honesty, workmanship, and exceptional
+        customer service, we ensure satisfaction from start to finish on every project.
+      </p>
+    </div>
+    <div class="aspect-video bg-ink rounded-lg flex items-center justify-center">
+      <button
+        aria-label="Play video"
+        class="w-16 h-16 rounded-full bg-accent/90 flex items-center justify-center hover:bg-accent transition-colors"
+      >
+        <svg width="20" height="22" viewBox="0 0 20 22" fill="white"><path d="M0 0l20 11-20 11z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>

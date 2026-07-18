@@ -1,0 +1,47 @@
+---
+import { company } from '../config/company';
+import { services } from '../config/services';
+import { cities } from '../config/cities';
+
+const year = new Date().getFullYear();
+---
+<footer class="bg-ink text-cream/80 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <div>
+      <p class="font-heading text-xl font-semibold text-cream mb-3">{company.name}</p>
+      <p class="text-sm leading-relaxed mb-4">{company.address}</p>
+      <p class="text-sm">{company.license}</p>
+    </div>
+
+    <div>
+      <p class="font-medium text-cream mb-4 text-sm uppercase tracking-wide">Services</p>
+      <ul class="space-y-2 text-sm">
+        {services.map((s) => (
+          <li><a href={`/services/${s.slug}`} class="hover:text-accent transition-colors">{s.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class="font-medium text-cream mb-4 text-sm uppercase tracking-wide">Areas We Serve</p>
+      <ul class="space-y-2 text-sm">
+        {cities.map((c) => (
+          <li><a href={`/${c.slug}`} class="hover:text-accent transition-colors">{c.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class="font-medium text-cream mb-4 text-sm uppercase tracking-wide">Contact</p>
+      <ul class="space-y-2 text-sm">
+        <li><a href={company.phoneHref} class="hover:text-accent transition-colors">{company.phone}</a></li>
+        <li><a href={`mailto:${company.email}`} class="hover:text-accent transition-colors">{company.email}</a></li>
+        <li><a href={company.cta.href} class="hover:text-accent transition-colors">{company.cta.label}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 pt-6 border-t border-cream/10 text-xs text-cream/50">
+    © {year} {company.name}. All rights reserved.
+  </div>
+</footer>
