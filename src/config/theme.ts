@@ -1,18 +1,21 @@
 // theme.ts — the only file that changes when you clone this for a new client.
 // Every color/font in the site pulls from here via CSS variables (see Layout.astro).
+//
+// Values below pulled directly from the original site's Elementor Global Kit CSS
+// (elementor-kit-6 variables), not eyeballed — see pixel-fidelity-sop.md.
 
 export const theme = {
   colors: {
-    ink: '#0b2545',       // deep navy — header, footer, banded sections (matches original brand)
-    primary: '#123a6b',   // buttons, nav active states
-    secondary: '#e8a23d', // warm accent, used sparingly (financing badge, etc.)
-    accent: '#2dd4e0',    // teal — the site's signature color: links, icons, highlighted words, CTAs
-    cream: '#ffffff',     // page background — clean white like the original, not off-white
+    ink: '#021125',       // Elementor --e-global-color-secondary — header/footer/banded sections
+    primary: '#223471',   // Elementor --e-global-color-primary — buttons, nav active states
+    secondary: '#61CE70', // Elementor --e-global-color-accent — used for checkmarks/success accents
+    accent: '#6BD0DF',    // Elementor --e-global-color-6664345 — CTA buttons, highlighted words, links
+    cream: '#ffffff',
   },
   fonts: {
-    heading: "'Poppins', sans-serif",
-    body: "'Inter', sans-serif",
+    heading: "'Roboto Slab', serif",  // Elementor --e-global-typography-secondary-font-family
+    body: "'Roboto', sans-serif",     // Elementor --e-global-typography-primary/text-font-family
   },
   fontImportUrl:
-    'https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap',
+    'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;600;700&display=swap',
 };
