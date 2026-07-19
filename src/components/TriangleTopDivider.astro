@@ -1,0 +1,15 @@
+---
+interface Props {
+  color?: string;
+}
+
+const { color = '#6BD0DF' } = Astro.props;
+---
+
+<div
+  class="absolute left-0 top-0 w-full h-7 md:h-9 pointer-events-none"
+  style={`
+    background:${color};
+    clip-path: polygon(100% 0%, 0% 0%, 0% 40%);
+  `}
+/>

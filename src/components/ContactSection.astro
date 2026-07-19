@@ -1,0 +1,135 @@
+---
+import { company } from '../config/company';
+import { Phone, MapPin } from 'lucide-astro';
+---
+<section class="py-16 md:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-start">
+    <!-- Left: intro + contact info -->
+    <div>
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-ink leading-tight mb-5">
+        Get A Free Estimate!
+      </h2>
+      <p class="text-ink/70 leading-relaxed mb-6">
+        Reach out to us by filling out the form below and we will call you back
+        to talk about your needs as soon as we can.
+      </p>
+      <div class="w-14 h-0.5 mb-8" style="background-color:#0b2545;"></div>
+
+      <p class="font-heading font-bold text-ink text-lg mb-4">Contact Information</p>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center gap-3">
+          <Phone size={16} color="#6BD0DF" />
+          <a href={company.phoneHref} class="font-semibold text-ink underline underline-offset-2 hover:text-primary transition-colors">
+            Office: {company.phone}
+          </a>
+        </li>
+        <li class="flex items-center gap-3">
+          <MapPin size={16} color="#6BD0DF" />
+          <a href={`mailto:${company.email}`} class="font-semibold text-ink underline underline-offset-2 hover:text-primary transition-colors">
+            {company.email}
+          </a>
+        </li>
+      </ul>
+
+      <p class="font-heading font-bold text-ink text-lg mb-4">Working Hours</p>
+      <ul class="space-y-1.5 text-ink/80 text-sm">
+        {company.workingHours.map((w) => (
+          <li><strong class="text-ink">{w.day}:</strong> {w.hours}</li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Right: form -->
+    <div class="rounded-xl p-8" style="background-color:#0b2545;">
+      <form id="contact-form" class="space-y-5">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-white font-semibold text-sm mb-2">Your Name</label>
+            <input
+              type="text" name="firstName" required
+              class="w-full px-4 py-2.5 rounded-md border-0 text-sm text-ink focus:outline-none focus:ring-2"
+              style="--tw-ring-color:#6BD0DF;"
+            />
+          </div>
+          <div>
+            <label class="block text-white font-semibold text-sm mb-2">Your Last Name</label>
+            <input
+              type="text" name="lastName" required
+              class="w-full px-4 py-2.5 rounded-md border-0 text-sm text-ink focus:outline-none focus:ring-2"
+              style="--tw-ring-color:#6BD0DF;"
+            />
+          </div>
+          <div>
+            <label class="block text-white font-semibold text-sm mb-2">Your Phone Number</label>
+            <input
+              type="tel" name="phone" required
+              class="w-full px-4 py-2.5 rounded-md border-0 text-sm text-ink focus:outline-none focus:ring-2"
+              style="--tw-ring-color:#6BD0DF;"
+            />
+          </div>
+          <div>
+            <label class="block text-white font-semibold text-sm mb-2">Your Email</label>
+            <input
+              type="email" name="email" required
+              class="w-full px-4 py-2.5 rounded-md border-0 text-sm text-ink focus:outline-none focus:ring-2"
+              style="--tw-ring-color:#6BD0DF;"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-white font-semibold text-sm mb-2">How Can We Help?</label>
+          <textarea
+            name="message" rows="6"
+            class="w-full px-4 py-3 rounded-md border-0 text-sm text-ink resize-none focus:outline-none focus:ring-2"
+            style="--tw-ring-color:#6BD0DF;"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="px-8 py-3 rounded-md font-bold text-white hover:brightness-95 transition"
+          style="background-color:#6BD0DF;"
+        >
+          Send
+        </button>
+
+        <p id="contact-form-status" class="text-xs pt-1" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('contact-form-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (status) status.textContent = 'Sending...';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // TODO: reemplazar por la URL real del webhook de GHL del cliente.
+    const WEBHOOK_URL = 'https://REPLACE-WITH-GHL-WEBHOOK-URL';
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (status) {
+        status.textContent = "Thanks! We'll be in touch soon.";
+        status.className = 'text-xs pt-1 font-medium';
+        status.style.color = '#6BD0DF';
+      }
+      form.reset();
+    } catch (err) {
+      if (status) {
+        status.textContent = 'Something went wrong. Please call us instead.';
+        status.className = 'text-xs pt-1 font-medium text-red-400';
+      }
+    }
+  });
+</script>

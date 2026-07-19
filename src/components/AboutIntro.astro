@@ -1,23 +1,63 @@
 ---
 import { company } from '../config/company';
+import Reveal from "../components/Reveal.astro";
 ---
+<Reveal direction="right" delay={150}>
 <section class="py-20 md:py-28 pt-32 md:pt-36">
   <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
     <div>
-      <p class="text-ink/70 leading-relaxed">
+      <h2 class="text-1xl md:text-5xl font-heading font-bold text-black leading-tight mb-10">
+        Imperial Custom Painting Company
+      </h2>
+      <p class="text-ink/70 leading-relaxed mb-8">
         <strong class="text-ink">{company.name}</strong>, based in {company.address},
         is a trusted painting company that offers a comprehensive range of painting
         services. With a strong commitment to honesty, workmanship, and exceptional
         customer service, we ensure satisfaction from start to finish on every project.
       </p>
+
+      <!-- Trust badges -->
+      <div class="flex flex-wrap items-center gap-x-10 gap-y-5">
+        <div>
+          <div class="flex items-center gap-1.5 mb-1">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="8" fill="#61CE70"/>
+              <path d="M4.5 8.2l2.2 2.2 4.8-4.8" stroke="white" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="font-semibold text-sm text-ink">Trustindex</span>
+          </div>
+          <p class="text-yellow-400 text-sm mb-1">★★★★★</p>
+          <a href={company.social.google} class="text-xs font-semibold text-ink underline underline-offset-2">
+            Based on {company.reviews.count} reviews
+          </a>
+        </div>
+
+        <img src="/public/images/badges/pca-badge.webp" alt="Painting Contractors Association" class="h-14 w-auto" />
+
+        <div>
+          <div class="flex items-center gap-1 mb-1">
+            <svg width="70" height="22" viewBox="0 0 74 24">
+              <text x="0" y="18" font-family="Arial" font-weight="700" font-size="19">
+                <tspan fill="#4285F4">G</tspan><tspan fill="#EA4335">o</tspan><tspan fill="#FBBC05">o</tspan><tspan fill="#4285F4">g</tspan><tspan fill="#34A853">l</tspan><tspan fill="#EA4335">e</tspan>
+              </text>
+            </svg>
+          </div>
+          <p class="text-yellow-400 text-sm">★★★★★</p>
+        </div>
+      </div>
     </div>
-    <div class="aspect-video bg-ink rounded-lg flex items-center justify-center">
-      <button
-        aria-label="Play video"
-        class="w-16 h-16 rounded-full bg-accent/90 flex items-center justify-center hover:bg-accent transition-colors"
-      >
-        <svg width="20" height="22" viewBox="0 0 20 22" fill="white"><path d="M0 0l20 11-20 11z"/></svg>
-      </button>
+
+    <div class="aspect-video bg-ink rounded-lg flex items-center justify-center relative overflow-hidden">
+      <iframe
+    src="https://player.vimeo.com/video/1121705599?autoplay=1&muted=1&background=1&loop=1"
+    class="w-full h-full"
+    loading="lazy"
+    title="Imperial Custom Painting"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+  ></iframe>
     </div>
   </div>
 </section>
+</Reveal>

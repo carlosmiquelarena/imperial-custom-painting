@@ -1,53 +1,166 @@
 ---
 import { company } from '../config/company';
+import EstimateForm from './EstimateForm.astro';
+import { PhoneCall, Paintbrush, ClipboardList, CalendarCheck, Mail, MapPin } from 'lucide-astro';
+import SectionDivider from './SectionDivider.astro';
 ---
-<section class="relative">
-  <div class="relative h-[520px] md:h-[560px] overflow-hidden">
+
+<section aria-label="Imperial Custom Painting services" class="relative">
+
+  <!-- Hero -->
+  <div class="relative min-h-[700px] md:min-h-[700px] overflow-hidden bg-[#0b2545]">
+
     <img
-      src="/images/hero-bg.jpg"
-      alt="Imperial Custom Painting crew at work"
+      src="/images/hero.webp"
+      alt="Imperial Custom Painting crew painting a home"
       class="absolute inset-0 w-full h-full object-cover"
-      onerror="this.style.background='linear-gradient(120deg,#0b2545,#123a6b)'"
+      loading="eager"
+      fetchpriority="high"
+      onerror="this.style.display='none'"
     />
-    <div class="absolute inset-0 bg-ink/70"></div>
 
-    <div class="relative max-w-7xl mx-auto px-6 h-full flex items-center">
-      <div class="max-w-2xl fade-up">
-        <h1 class="text-3xl md:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
-          Professional Painters In
-          <span class="text-accent">SLO County &amp; SB County</span>
-          Exterior, Interior, Cabinet &amp; More
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-[#021125]/55"></div>
+
+
+    <div class="relative w-[90%] max-w-5xl mx-auto pt-32 md:pt-40 pb-40 h-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-14">
+
+
+      <!-- Content -->
+      <div class="max-w-xl">
+
+        <h1 class="text-3xl md:text-5xl font-heading font-extrabold text-white leading-tight">
+          Trusted Painters For Interior, Exterior & Cabinet Projects In
+          <span class="text-accent">
+            San Luis Obispo & Santa Barbara Counties
+          </span>
         </h1>
+
+
+        <p class="text-lg text-white/85 mt-5 mb-8 leading-relaxed max-w-lg">
+          Imperial Custom Painting delivers professional residential and commercial
+          painting services with quality craftsmanship, attention to detail, and
+          results designed to last.
+        </p>
+
+
         <a
-          href={company.cta.href}
-          class="inline-flex items-center bg-accent text-ink px-7 py-3.5 rounded-md font-bold hover:brightness-95 transition"
+          href={company.phoneHref}
+          class="inline-flex items-center px-7 py-3.5 rounded-md font-bold text-[#081b34] transition hover:brightness-95"
+          style="background-color:#6BD0DF;"
         >
-          {company.cta.label}
+          Call {company.phone}
         </a>
+
       </div>
+
+
+
+      <!-- Estimate Form -->
+      <div class="w-full md:w-[420px] shrink-0">
+        <h2 class="sr-only">
+          Request your free painting estimate
+        </h2>
+
+        <EstimateForm />
+      </div>
+
+
     </div>
+
+  </div>
+<SectionDivider color="#6BD0DF" />
+
+
+
+  <!-- Process Steps -->
+<div class="relative max-w-4xl mx-auto px-6 -mt-16 md:-mt-20 z-10">
+
+  <div class="bg-white rounded-xl shadow-2xl grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-black/10">
+
+    {[
+      {
+        icon: PhoneCall,
+        label: "Contact Us",
+        desc: "Tell us about your painting project and your goals.",
+      },
+      {
+        icon: ClipboardList,
+        label: "Free Estimate",
+        desc: "Receive a detailed quote with no obligation.",
+      },
+      {
+        icon: CalendarCheck,
+        label: "Schedule Project",
+        desc: "Choose a convenient time that fits your schedule.",
+      },
+      {
+        icon: Paintbrush,
+        label: "Enjoy Your New Space",
+        desc: "Our team completes your project with quality results.",
+      },
+    ].map((step, index) => {
+      const Icon = step.icon;
+      const featured = index === 3;
+
+      return (
+        <div
+          class:list={[
+            "p-6 flex gap-4 items-start transition-colors",
+            featured && "bg-accent text-white"
+          ]}
+        >
+          {/* Icon Circle */}
+          <div
+            class:list={[
+              "w-11 h-11 shrink-0 rounded-full flex items-center justify-center",
+              featured
+                ? "bg-white text-accent"
+                : "bg-accent text-white"
+            ]}
+          >
+            <Icon size={20} strokeWidth={2.2} />
+          </div>
+
+          {/* Content */}
+          <div>
+
+            <p
+              class:list={[
+                "font-heading text-sm mb-1",
+                featured ? "text-white/80" : "text-ink"
+              ]}
+            >
+              Step {index + 1}
+            </p>
+
+            <p
+              class:list={[
+                "font-semibold text-sm mb-2",
+                featured ? "text-white" : "text-ink"
+              ]}
+            >
+              {step.label}
+            </p>
+
+            <p
+              class:list={[
+                "text-xs leading-relaxed",
+                featured ? "text-white/85" : "text-ink/60"
+              ]}
+            >
+              {step.desc}
+            </p>
+
+          </div>
+
+        </div>
+      );
+    })}
+
   </div>
 
-  <!-- Floating step cards, overlapping the hero's bottom edge -->
-  <div class="relative max-w-6xl mx-auto px-6 -mt-16 md:-mt-20 z-10">
-    <div class="bg-white rounded-xl shadow-2xl grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-ink/10">
-      {[
-        { n: 1, label: 'Contact Us', desc: 'Explain the details about your project.' },
-        { n: 2, label: 'Free Estimate', desc: 'We provide a 100% free quote for your project.' },
-        { n: 3, label: 'Schedule Project', desc: 'We find your project on the schedule.' },
-        { n: 4, label: 'Ideal Project', desc: 'Your painting job is completed on time and on budget.' },
-      ].map((step) => (
-        <div class="p-6 flex gap-4 items-start">
-          <div class="w-10 h-10 shrink-0 rounded-full bg-accent/15 text-accent flex items-center justify-center font-bold">
-            {step.n}
-          </div>
-          <div>
-            <p class="font-heading font-semibold text-ink text-sm mb-1">Step {step.n}</p>
-            <p class="font-semibold text-ink text-sm mb-1">{step.label}</p>
-            <p class="text-xs text-ink/60 leading-relaxed">{step.desc}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
+</div>
+
+
 </section>

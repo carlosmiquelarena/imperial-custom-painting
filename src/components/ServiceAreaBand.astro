@@ -1,17 +1,30 @@
 ---
-import ZigzagDivider from './ZigzagDivider.astro';
 import { cities } from '../config/cities';
 import { company } from '../config/company';
+import TriangleTopDivider from './TriangleTopDivider.astro';
 ---
 <div>
-  <ZigzagDivider color="var(--color-ink)" />
-  <section class="bg-ink text-white py-16 md:py-20">
-    <div class="max-w-5xl mx-auto px-6 text-center">
+  <section
+    class="relative text-white py-16 md:py-20 bg-cover bg-center"
+    style="background-image: url('/images/service-area-bg.webp');"
+
+    
+  >
+    <div class="absolute inset-0" style="background-color: rgba(11, 37, 69, 0.8);"></div>
+
+     <!-- Divider -->
+  <div class="absolute top-0 left-0 w-full -translate-y-full z-30">
+    <TriangleTopDivider color="#6BD0DF" />
+  </div>
+
+    <div class="relative max-w-5xl mx-auto px-6 text-center">
       <h2 class="font-heading text-2xl md:text-3xl font-bold mb-3">
         Painting Services In {company.serviceArea} and Surrounding Areas
       </h2>
+      <p class="font-body text-sm font-normal mb-3 pt-2 pb-2">
+        We want to serve as many customers as we can. See the many cities we serve below. We aim to provide all our clients with the quality of service that they deserve. That’s our commitment at Imperial Custom Painting Company, and while we are based in Grover Beach we also serve other areas. The following is the list of areas that we proudly serve!
+      </p>
       <div class="w-14 h-1 bg-accent mx-auto mb-10 rounded-full"></div>
-
       <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-white/85">
         {cities.map((c) => (
           <span class="flex items-center gap-2">
@@ -22,7 +35,8 @@ import { company } from '../config/company';
           </span>
         ))}
       </div>
+      
     </div>
   </section>
-  <ZigzagDivider color="var(--color-ink)" flip />
+
 </div>

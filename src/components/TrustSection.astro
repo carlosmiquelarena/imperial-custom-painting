@@ -1,0 +1,96 @@
+---
+import SectionDivider from './SectionDivider.astro';
+import { company } from '../config/company';
+import { Check } from 'lucide-astro';
+
+const stats = [
+  { value: '100%', label: 'Reliable and professional crews' },
+  { value: '100%', label: 'Projects completed on time' },
+  { value: '100%', label: 'Communication throughout every project' },
+];
+---
+
+<div>
+
+  <SectionDivider color="#6BD0DF" />
+
+  <section
+    class="relative overflow-hidden py-16 md:py-20 bg-cover bg-center"
+    style="background-image: url('/images/why-trust-us-area-bg.webp');"
+  >
+
+    <div class="absolute inset-0" style="background-color: rgba(11, 37, 69, 0.89);"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Image -->
+      <div class="overflow-hidden rounded-xl shadow-2xl">
+        <img
+          src="/images/why-trust-us.webp"
+          alt="Recently completed exterior painting project"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="text-white">
+
+        <p class="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70">
+          {company.name}
+        </p>
+
+        <h2 class="font-heading mb-5 text-3xl font-bold md:text-4xl">
+          Why Trust Us?
+        </h2>
+
+        <p class="mb-8 leading-relaxed text-white/80">
+          We are professional, insured, and committed to delivering exceptional
+          craftsmanship on every project. Our crews arrive on time, keep you informed
+          throughout the process, and treat your property with care. Your satisfaction
+          is our highest priority, and we strive to earn a five-star review on every job.
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+
+          {stats.map((s) => (
+            <div class="flex items-start gap-3">
+
+              <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent">
+                <Check size={16} class="text-white" />
+              </div>
+
+              <div>
+
+                <span class="block font-heading text-xl text-accent">
+                  {s.value}
+                </span>
+
+                <p class="text-sm leading-snug text-white/75">
+                  {s.label}
+                </p>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
+        <!-- CTA -->
+        <a
+          href={company.cta.href}
+          class="inline-flex items-center rounded-md bg-accent px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-ink transition hover:brightness-95"
+        >
+          Get Free Estimate
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <SectionDivider color="#6BD0DF" />
+
+</div>

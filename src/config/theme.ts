@@ -9,13 +9,14 @@ export const theme = {
     ink: '#021125',       // Elementor --e-global-color-secondary — header/footer/banded sections
     primary: '#223471',   // Elementor --e-global-color-primary — buttons, nav active states
     secondary: '#61CE70', // Elementor --e-global-color-accent — used for checkmarks/success accents
-    accent: '#6BD0DF',    // Elementor --e-global-color-6664345 — CTA buttons, highlighted words, links
+    accent: '#28a0b1',    // Elementor --e-global-color-6664345 — CTA buttons, highlighted words, links
     cream: '#ffffff',
   },
   fonts: {
-    heading: "'Roboto Slab', serif",  // Elementor --e-global-typography-secondary-font-family
-    body: "'Roboto', sans-serif",     // Elementor --e-global-typography-primary/text-font-family
+    heading: "'Francois One', sans-serif",
+    body: "'Poppins', sans-serif",
   },
+
   fontImportUrl:
-    'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;600;700&display=swap',
+    'https://fonts.googleapis.com/css2?family=Francois+One&family=Poppins:wght@300;400;500;600;700&display=swap',
 };

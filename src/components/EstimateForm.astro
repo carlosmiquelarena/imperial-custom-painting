@@ -1,0 +1,105 @@
+---
+const ACCENT = '#6BD0DF';
+---
+<div class="rounded-xl shadow-2xl overflow-hidden w-full max-w-sm bg-white">
+  <div class="px-6 py-5" style={`background-color:${ACCENT};`}>
+    <p class="font-heading font-bold text-white text-lg text-center">
+      Schedule Your Free Estimate Today
+    </p>
+  </div>
+
+  <form id="estimate-form" class="p-6 space-y-3">
+    <input
+      type="text"
+      name="firstName"
+      placeholder="First Name"
+      required
+      class="w-full px-4 py-3 rounded-md border border-black/15 text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2"
+      style="--tw-ring-color: var(--color-accent)"
+    />
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Last Name"
+      required
+      class="w-full px-4 py-3 rounded-md border border-black/15 text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2"
+      style="--tw-ring-color: var(--color-accent)"
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      required
+      class="w-full px-4 py-3 rounded-md border border-black/15 text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2"
+      style="--tw-ring-color: var(--color-accent)"
+    />
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Phone"
+      required
+      class="w-full px-4 py-3 rounded-md border border-black/15 text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2"
+      style="--tw-ring-color: var(--color-accent);"
+    />
+    <select
+      name="service"
+      required
+      class="w-full px-4 py-3 rounded-md border border-black/15 text-sm text-ink/70 focus:outline-none focus:ring-2 appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 20 20%22 fill=%22%23333%22><path d=%22M5 7l5 5 5-5z%22/></svg>')] bg-no-repeat bg-[right_1rem_center]"
+      style="--tw-ring-color: var(--color-accent);"
+    >
+      <option value="" disabled selected>Select Your Service</option>
+      <option value="exterior">Exterior Painting</option>
+      <option value="interior">Interior Painting</option>
+      <option value="cabinet">Cabinet Refinishing</option>
+      <option value="faux">Faux Finishes</option>
+      <option value="commercial">Commercial Painting</option>
+      <option value="pressure-washing">Pressure Washing</option>
+    </select>
+
+    <button
+      type="submit"
+      class="w-full py-3.5 rounded-md font-bold text-ink flex items-center justify-center gap-2 hover:brightness-95 transition"
+      style={`background-color: var(--color-accent);`}
+    >
+      Submit
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <p id="estimate-form-status" class="text-xs text-center pt-1" aria-live="polite"></p>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('estimate-form') as HTMLFormElement | null;
+  const status = document.getElementById('estimate-form-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (status) status.textContent = 'Sending...';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // TODO: reemplazar por la URL real del webhook de GHL del cliente.
+    const WEBHOOK_URL = 'https://REPLACE-WITH-GHL-WEBHOOK-URL';
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (status) {
+        status.textContent = "Thanks! We'll be in touch within 48 hours.";
+        status.className = 'text-xs text-center pt-1 text-green-700 font-medium';
+      }
+      form.reset();
+    } catch (err) {
+      if (status) {
+        status.textContent = 'Something went wrong. Please call us instead.';
+        status.className = 'text-xs text-center pt-1 text-red-600 font-medium';
+      }
+    }
+  });
+</script>

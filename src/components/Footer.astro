@@ -1,47 +1,203 @@
 ---
 import { company } from '../config/company';
 import { services } from '../config/services';
-import { cities } from '../config/cities';
+import { Facebook, Instagram } from 'lucide-astro';
 
 const year = new Date().getFullYear();
+const mapQuery = encodeURIComponent(company.address);
 ---
-<footer class="bg-ink text-cream/80 pt-16 pb-8">
-  <div class="max-w-7xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-    <div>
-      <p class="font-heading text-xl font-semibold text-cream mb-3">{company.name}</p>
-      <p class="text-sm leading-relaxed mb-4">{company.address}</p>
-      <p class="text-sm">{company.license}</p>
+
+<footer
+  class="relative overflow-hidden text-white"
+  style="background-color:#0b2545;"
+>
+  <!-- Background Image -->
+  <img
+    src="/images/footer-bg.jpg"
+    alt=""
+    class="absolute inset-0 h-full w-full object-cover opacity-15"
+    onerror="this.style.display='none'"
+  />
+
+  <!-- Overlay -->
+  <div
+    class="absolute inset-0"
+    style="background-color:rgba(11,37,69,.88);"
+  ></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-10">
+
+    <div class="grid gap-10 md:grid-cols-5 mb-12">
+
+      <!-- Company -->
+      <div>
+
+        <img
+          src={company.logo.src}
+          alt={company.logo.alt}
+          width={company.logo.width}
+          height={company.logo.height}
+          class="mb-4 h-14 w-auto"
+        />
+
+        <p class="mb-6 text-sm leading-relaxed text-white/70">
+          We are the trusted local painters serving {company.serviceArea}.
+          From interior and exterior painting to cabinets and commercial
+          projects, our team delivers quality workmanship with exceptional
+          customer service.
+        </p>
+
+        <div class="flex items-center gap-3">
+
+          <a
+            href={company.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-accent transition-all duration-300 hover:scale-110 hover:brightness-90"
+          >
+            <Facebook size={18} class="text-white" />
+          </a>
+
+          <a
+            href={company.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-accent transition-all duration-300 hover:scale-110 hover:brightness-90"
+          >
+            <Instagram size={18} class="text-white" />
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Services -->
+      <div>
+
+        <h3 class="mb-4 font-heading text-lg font-bold">
+          Painting Services
+        </h3>
+
+        <ul class="space-y-2 text-sm text-white/70">
+
+          {services.map((service) => (
+            <li>
+              <a
+                href={`/services/${service.slug}`}
+                class="transition-colors hover:text-accent"
+              >
+                {service.name}
+              </a>
+            </li>
+          ))}
+
+        </ul>
+
+      </div>
+
+      <!-- Contact -->
+      <div>
+
+        <h3 class="mb-4 font-heading text-lg font-bold">
+          Contact Information
+        </h3>
+
+        <ul class="space-y-3 text-sm leading-relaxed text-white/70">
+
+          <li>
+            <strong class="text-white">Office:</strong><br />
+            <a
+              href={company.phoneHref}
+              class="transition-colors hover:text-accent"
+            >
+              {company.phone}
+            </a>
+          </li>
+
+          <li>
+            <strong class="text-white">Address:</strong><br />
+            {company.address}
+          </li>
+
+          <li>
+            <strong class="text-white">Email:</strong><br />
+            <a
+              href={`mailto:${company.email}`}
+              class="transition-colors hover:text-accent"
+            >
+              {company.email}
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <!-- Links -->
+      <div>
+
+        <h3 class="mb-4 font-heading text-lg font-bold">
+          Useful Links
+        </h3>
+
+        <ul class="space-y-2 text-sm text-white/70">
+
+          <li><a href="/" class="hover:text-accent transition-colors">Home</a></li>
+          <li><a href="/about" class="hover:text-accent transition-colors">About Us</a></li>
+          <li><a href="/gallery" class="hover:text-accent transition-colors">Gallery</a></li>
+          <li><a href="/reviews" class="hover:text-accent transition-colors">Reviews</a></li>
+          <li><a href="/contact" class="hover:text-accent transition-colors">Contact Us</a></li>
+
+        </ul>
+
+      </div>
+
+      <!-- Map -->
+      <div>
+
+        <h3 class="mb-4 font-heading text-lg font-bold">
+          Our Location
+        </h3>
+
+        <div class="aspect-square overflow-hidden rounded-xl border border-white/10">
+
+          <iframe
+            title={`${company.name} Map`}
+            src={`https://maps.google.com/maps?q=${mapQuery}&z=13&output=embed`}
+            class="h-full w-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <div>
-      <p class="font-medium text-cream mb-4 text-sm uppercase tracking-wide">Services</p>
-      <ul class="space-y-2 text-sm">
-        {services.map((s) => (
-          <li><a href={`/services/${s.slug}`} class="hover:text-accent transition-colors">{s.name}</a></li>
-        ))}
-      </ul>
+    <!-- Bottom -->
+    <div class="border-t border-white/10 pt-6 text-center text-sm text-white/60">
+
+      <p>
+        © {year} {company.name}. All Rights Reserved.
+      </p>
+
+      <p class="mt-2">
+        Website by
+        <a
+          href="https://freshcoatmarketing.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-accent hover:underline"
+        >
+          Fresh Coat Marketing
+        </a>
+      </p>
+
     </div>
 
-    <div>
-      <p class="font-medium text-cream mb-4 text-sm uppercase tracking-wide">Areas We Serve</p>
-      <ul class="space-y-2 text-sm">
-        {cities.map((c) => (
-          <li><a href={`/${c.slug}`} class="hover:text-accent transition-colors">{c.name}</a></li>
-        ))}
-      </ul>
-    </div>
-
-    <div>
-      <p class="font-medium text-cream mb-4 text-sm uppercase tracking-wide">Contact</p>
-      <ul class="space-y-2 text-sm">
-        <li><a href={company.phoneHref} class="hover:text-accent transition-colors">{company.phone}</a></li>
-        <li><a href={`mailto:${company.email}`} class="hover:text-accent transition-colors">{company.email}</a></li>
-        <li><a href={company.cta.href} class="hover:text-accent transition-colors">{company.cta.label}</a></li>
-      </ul>
-    </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-6 pt-6 border-t border-cream/10 text-xs text-cream/50">
-    © {year} {company.name}. All rights reserved.
-  </div>
 </footer>

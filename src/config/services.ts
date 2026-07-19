@@ -25,8 +25,8 @@ export const services: Service[] = [
     icon: 'cabinet',
   },
   {
-    name: 'Faux Finishes',
-    slug: 'faux-finishes',
+    name: 'Deck & Fences',
+    slug: 'deck-fence-painting',
     blurb: 'Custom textures and decorative finishes for accent walls and statement rooms.',
     icon: 'faux',
   },

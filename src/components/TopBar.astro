@@ -1,19 +1,58 @@
 ---
 import { company } from '../config/company';
+import { Facebook, Instagram, Star, Phone, Mail, MapPin } from 'lucide-astro';
 ---
-<div class="bg-[#081b34] text-white/80 text-xs md:text-sm">
-  <div class="max-w-7xl mx-auto px-6 py-2 flex flex-wrap items-center justify-between gap-2">
-    <div class="flex items-center gap-5">
-      <a href={company.phoneHref} class="hover:text-accent transition-colors">{company.phone}</a>
-      <a href={`mailto:${company.email}`} class="hidden sm:inline hover:text-accent transition-colors">{company.email}</a>
-    </div>
+
+<div class="absolute top-0 left-0 w-full z-50 text-white/85">
+
+  <div class="w-[90%] max-w-7xl mx-auto px-0 py-2 flex flex-wrap items-center justify-between gap-2 text-xs md:text-sm">
+
+
+    <!-- Social Media Left -->
     <div class="flex items-center gap-4">
-      <span class="hidden md:inline">Serving {company.serviceArea}</span>
-      <div class="flex items-center gap-3">
-        <a href={company.social.facebook} aria-label="Facebook" class="hover:text-accent transition-colors">FB</a>
-        <a href={company.social.instagram} aria-label="Instagram" class="hover:text-accent transition-colors">IG</a>
-        <a href={company.social.google} aria-label="Google Reviews" class="hover:text-accent transition-colors">G</a>
-      </div>
+
+  <a href={company.social.facebook} aria-label="Facebook">
+    <Facebook size={16} />
+  </a>
+
+      <a
+        href={company.social.instagram}
+        aria-label="Instagram"></a>
+       <Instagram size={16} />
+
     </div>
+
+
+
+    <!-- Contact Right -->
+    <div class="flex items-center gap-5">
+
+  <a
+    href={company.phoneHref}
+    class="flex items-center gap-2 hover:text-accent transition-colors"
+  >
+    <Phone size={16} />
+    <span>{company.phone}</span>
+  </a>
+
+
+  <a
+    href={`mailto:${company.email}`}
+    class="hidden sm:flex items-center gap-2 hover:text-accent transition-colors"
+  >
+    <Mail size={16} />
+    <span>{company.email}</span>
+  </a>
+
+
+  <span class="hidden md:flex items-center gap-2">
+    <MapPin size={16} />
+    <span>Serving {company.serviceArea}</span>
+  </span>
+
+</div>
+
+
   </div>
+
 </div>

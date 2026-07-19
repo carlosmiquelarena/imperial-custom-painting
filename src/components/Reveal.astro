@@ -1,0 +1,74 @@
+---
+interface Props {
+  direction?: "up" | "down" | "left" | "right";
+  delay?: number;
+  duration?: number;
+}
+
+const {
+  direction = "up",
+  delay = 0,
+  duration = 700,
+} = Astro.props;
+---
+
+<div
+  class="reveal"
+  data-direction={direction}
+  style={`--delay:${delay}ms; --duration:${duration}ms;`}
+>
+  <slot />
+</div>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+    }
+  );
+
+  document.querySelectorAll(".reveal").forEach((el) => {
+    observer.observe(el);
+  });
+</script>
+
+<style>
+.reveal{
+  opacity:0;
+  transition:
+    opacity var(--duration) ease,
+    transform var(--duration) cubic-bezier(.22,1,.36,1);
+
+  transition-delay:var(--delay);
+  will-change:transform,opacity;
+}
+
+.reveal[data-direction="up"]{
+  transform:translateY(45px);
+}
+
+.reveal[data-direction="down"]{
+  transform:translateY(-45px);
+}
+
+.reveal[data-direction="left"]{
+  transform:translateX(45px);
+}
+
+.reveal[data-direction="right"]{
+  transform:translateX(-45px);
+}
+
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
+</style>

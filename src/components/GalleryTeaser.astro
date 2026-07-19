@@ -1,18 +1,22 @@
 ---
 const placeholders = Array.from({ length: 4 });
+import SectionDivider from './SectionDivider.astro';
+import Reveal from "../components/Reveal.astro";
+
 ---
 <section class="py-16 bg-white">
+    <SectionDivider />
   <div class="max-w-7xl mx-auto px-6 text-center">
     <p class="uppercase tracking-widest text-sm font-bold text-ink mb-2">
       See Our Previous Painting Projects
     </p>
     <div class="w-14 h-1 bg-accent mx-auto mb-10 rounded-full"></div>
-
+<Reveal direction="right" delay={150}>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       {placeholders.map((_, i) => (
         <div class="aspect-square rounded-lg bg-ink/5 border border-ink/10 overflow-hidden">
           <img
-            src={`/images/gallery-${i + 1}.jpg`}
+            src={`/images/gallery-${i + 1}.webp`}
             alt={`Painting project ${i + 1}`}
             class="w-full h-full object-cover"
             onerror="this.style.display='none'"
@@ -20,7 +24,7 @@ const placeholders = Array.from({ length: 4 });
         </div>
       ))}
     </div>
-
+</Reveal>
     <a href="/gallery" class="inline-block mt-8 text-primary font-semibold hover:text-accent transition-colors text-sm">
       View Full Gallery →
     </a>
