@@ -1,5 +1,11 @@
 ---
 import '../styles/global.css';
+import '@fontsource/francois-one';
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
 import { theme } from '../config/theme';
 import { company } from '../config/company';
 
@@ -25,9 +31,6 @@ const cssVars = `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href={theme.fontImportUrl} />
     <title>{title} | {company.name}</title>
     <meta name="description" content={description} />
   </head>

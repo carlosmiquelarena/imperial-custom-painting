@@ -15,8 +15,6 @@ export const theme = {
   fonts: {
     heading: "'Francois One', sans-serif",
     body: "'Poppins', sans-serif",
-  },
+  }
 
-  fontImportUrl:
-    'https://fonts.googleapis.com/css2?family=Francois+One&family=Poppins:wght@300;400;500;600;700&display=swap',
-};
+}
