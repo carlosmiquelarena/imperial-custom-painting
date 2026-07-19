@@ -1,6 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v4: en vez de tailwind.config.mjs, el theme se define en CSS.
+   @theme inline hace que Tailwind genere bg-ink, text-accent, font-heading, etc.
+   apuntando a las CSS variables que Layout.astro inyecta desde theme.ts en runtime.
+   Así seguimos re-brandeando cada cliente tocando un solo archivo (theme.ts). */
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-cream: var(--color-cream);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
 
 html {
   scroll-behavior: smooth;

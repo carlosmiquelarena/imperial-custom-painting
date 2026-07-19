@@ -9,9 +9,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/tailwind": "^5.1.0",
-    "astro": "^7.1.1",
-    "lucide-astro": "^0.556.0",
-    "tailwindcss": "^3.4.0"
+    "astro": "7.1.1",
+    "tailwindcss": "4.3.3",
+    "@tailwindcss/vite": "4.3.3",
+    "lucide-astro": "0.556.0"
   }
 }
